@@ -17,5 +17,5 @@ public class CarRequest {
 	private Integer numberOfGears;
 	private boolean hasNavigationSystem;
 	private boolean hasParkingSensors;
-	private Integer vehicle_id;
+	private Integer vehicleId;
 }

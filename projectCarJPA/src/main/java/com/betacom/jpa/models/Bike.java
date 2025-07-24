@@ -8,6 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+//import jakarta.persistence.OneToOne;
+//import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,13 +17,12 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "bikes")
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class Bike extends Vehicle {
+public class Bike {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,6 +41,6 @@ public class Bike extends Vehicle {
 	private String brakeType;
 
 	@OneToOne
-	@JoinColumn(name = "vehicle_id", referencedColumnName = "id")
+	@JoinColumn(name = "vehicleId", referencedColumnName = "id")
 	private Vehicle vehicle;
 }

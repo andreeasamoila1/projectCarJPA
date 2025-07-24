@@ -14,6 +14,7 @@ import com.betacom.jpa.services.interfaces.IMotorcycleServices;
 import com.betacom.jpa.services.interfaces.IVehicleServices;
 
 import lombok.extern.log4j.Log4j2;
+
 @Log4j2
 @Component
 public class MainProcess {
@@ -26,10 +27,9 @@ public class MainProcess {
 	private IMotorcycleServices motorcycleService;
 	@Autowired
 	private IBikeServices bikeService;
-	
-	
+
 	public void execute() {
-		
+
 		try {
 			VehicleRequest vehicle = new VehicleRequest();
 			vehicle.setVehicleType("Car");
@@ -44,10 +44,8 @@ public class MainProcess {
 			vehicle.setYear(2016);
 			vehicle.setFrameMaterial("Carbon");
 			vehicle.setMaxSpeed(150);
-			
+
 			int vehicleId = vehicleService.insert(vehicle);
-			
-		
 			CarRequest car = new CarRequest();
 			car.setNumberOfDoors(4);
 			car.setPlate("TR34ERS");
@@ -56,9 +54,10 @@ public class MainProcess {
 			car.setNumberOfGears(5);
 			car.setHasNavigationSystem(false);
 			car.setHasParkingSensors(true);
-			
-			int carId = carService.insert(car);
-			
+			car.setVehicleId(vehicleId);
+
+			carService.create(car);
+
 			MotorcycleRequest motorcycle = new MotorcycleRequest();
 			motorcycle.setPlate("HTE49MOM");
 			motorcycle.setBodyStyle("naked");
@@ -66,17 +65,19 @@ public class MainProcess {
 			motorcycle.setHasABS(true);
 			motorcycle.setTransmissionType("diesel");
 			motorcycle.setNumberOfGears(6);
-			
-			int motorcycleId = motorcycleService.insert(motorcycle);
-			
+			motorcycle.setVehicleId(vehicleId);
+
+			motorcycleService.create(motorcycle);
+
 			BikeRequest bike = new BikeRequest();
 			bike.setType("electric");
 			bike.setSuspensionType("none");
 			bike.setFolding(false);
 			bike.setBrakeType("sklaks");
-			
-			int bikeId = bikeService.insert(bike);
-			
+			bike.setVehicleId(vehicleId);
+
+			bikeService.create(bike);
+
 		} catch (AcademyException e) {
 			log.error(e.getMessage());
 		}

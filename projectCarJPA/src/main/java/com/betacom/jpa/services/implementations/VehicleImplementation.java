@@ -23,12 +23,13 @@ public class VehicleImplementation implements IVehicleServices {
 	@Override
 	public Integer insert(VehicleRequest vehicleReq) throws AcademyException {
 		log.debug("Insert :" + vehicleReq);
-		Vehicle vehicle = new Vehicle();
-		Optional<Vehicle> v = vehicleRepository.findById(vehicleReq.getId());
+
+		Optional<Vehicle> v = vehicleRepository.findByBrand(vehicleReq.getBrand());
 
 		if (v.isPresent())
 			throw new AcademyException("This vehicle exists in the database");
 
+		Vehicle vehicle = new Vehicle();
 		vehicle.setVehicleType(vehicleReq.getVehicleType());
 		vehicle.setBrand(vehicleReq.getBrand());
 		vehicle.setModel(vehicleReq.getModel());
@@ -44,5 +45,4 @@ public class VehicleImplementation implements IVehicleServices {
 
 		return vehicleRepository.save(vehicle).getId();
 	}
-
 }

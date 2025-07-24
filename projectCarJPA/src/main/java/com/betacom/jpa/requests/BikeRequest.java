@@ -14,5 +14,6 @@ public class BikeRequest {
 	private String suspensionType;
 	private Boolean folding;
 	private String brakeType;
-	private Integer vehicle_id;
+	private Integer vehicleId;
+	
 }

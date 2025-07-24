@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.betacom.jpa.models.Bike;
 
 @Repository
-public interface IBikeRepository extends JpaRepository<Bike, Integer>{
+public interface IBikeRepository extends JpaRepository<Bike, Integer> {
 
 }

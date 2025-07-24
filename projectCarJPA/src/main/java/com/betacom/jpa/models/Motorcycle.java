@@ -7,6 +7,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+//import jakarta.persistence.GenerationType;
+//import jakarta.persistence.Id;
+//import jakarta.persistence.JoinColumn;
+//import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,7 +24,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Motorcycle extends Vehicle{
+public class Motorcycle{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,6 +49,6 @@ public class Motorcycle extends Vehicle{
 	private int numberOfGears;
 	
 	@OneToOne
-	@JoinColumn(name = "vehicle_id", referencedColumnName = "id")
+	@JoinColumn(name = "vehicleId", referencedColumnName = "id")
 	private Vehicle vehicle;
 }

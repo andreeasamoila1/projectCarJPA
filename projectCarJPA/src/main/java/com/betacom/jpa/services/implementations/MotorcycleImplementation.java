@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.betacom.jpa.exceptions.AcademyException;
 import com.betacom.jpa.models.Motorcycle;
+import com.betacom.jpa.models.Vehicle;
 import com.betacom.jpa.repositories.IMotorcycleRepository;
+import com.betacom.jpa.repositories.IVehicleRepository;
 import com.betacom.jpa.requests.MotorcycleRequest;
 import com.betacom.jpa.services.interfaces.IMotorcycleServices;
 
@@ -19,14 +21,16 @@ public class MotorcycleImplementation implements IMotorcycleServices {
 
 	@Autowired
 	private IMotorcycleRepository motorcycleRepository;
+	@Autowired
+	IVehicleRepository vehicleRepository;
 
 	@Override
-	public Integer insert(MotorcycleRequest motorcycleReq) throws AcademyException {
+	public void create(MotorcycleRequest motorcycleReq) throws AcademyException {
 		log.debug("Insert :" + motorcycleReq);
 		Motorcycle motorcycle = new Motorcycle();
-		Optional<Motorcycle> m = motorcycleRepository.findByPlate(motorcycleReq.getPlate());
+		Optional<Vehicle> v = vehicleRepository.findById(motorcycleReq.getVehicleId());
 
-		if (m.isPresent())
+		if (v.isPresent())
 			throw new AcademyException("This motorcycle exists in he database");
 
 		motorcycle.setPlate(motorcycleReq.getPlate());
@@ -35,8 +39,9 @@ public class MotorcycleImplementation implements IMotorcycleServices {
 		motorcycle.setHasABS(motorcycleReq.isHasABS());
 		motorcycle.setTransmissionType(motorcycleReq.getTransmissionType());
 		motorcycle.setNumberOfGears(motorcycleReq.getNumberOfGears());
+		motorcycle.setVehicle(v.get());
 
-		return motorcycleRepository.save(motorcycle).getId();
+		motorcycleRepository.save(motorcycle);
 	}
 
 }

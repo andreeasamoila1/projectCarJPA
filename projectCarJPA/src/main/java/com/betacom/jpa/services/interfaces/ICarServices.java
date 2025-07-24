@@ -8,6 +8,6 @@ import com.betacom.jpa.requests.CarRequest;
 @Service
 public interface ICarServices {
 
-	Integer insert(CarRequest carReq) throws AcademyException;
+	void create(CarRequest carReq) throws AcademyException;
 
 }

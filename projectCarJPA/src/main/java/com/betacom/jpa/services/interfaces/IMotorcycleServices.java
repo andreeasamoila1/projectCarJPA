@@ -8,5 +8,6 @@ import com.betacom.jpa.requests.MotorcycleRequest;
 @Service
 public interface IMotorcycleServices {
 
-	Integer insert(MotorcycleRequest motorcycleReq) throws AcademyException;
+	void create(MotorcycleRequest motorcycleReq) throws AcademyException;
+
 }
